@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Async Programming Practice</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setTimeout(function(){
+    //     console.log("sharoon")
+    // },2000)
+
+    //passing function as reference 
+    // function sayHello(){
+    //     console.log("hello")
+    // }
+    // setTimeout(sayHello,2000);
+
+
+    const changeText = ()=>{
+            const h1 = document.querySelector('h1');
+            h1.innerText = 'Asychronous Programming Code';
+    }
+    setTimeout(changeText,2000)
+
+    const stop = document.getElementById("stop");
+    stop.addEventListener('click',()=>{
+        console.log("stopped");
+        clearTimeout(changeText);
+    })
+
+</script>
+</html>
