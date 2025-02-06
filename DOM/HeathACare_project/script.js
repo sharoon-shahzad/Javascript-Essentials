@@ -2,7 +2,10 @@
 
 // taking the input values from the user form
 
-const addPatientbtn = document.getElementById("addPatient");
+const addPatientButton = document.getElementById("addPatient");
+const report = document.getElementById("report");
+const btnSearch = document.getElementById('btnSearch');
+
 
 let patientList = [];
 
@@ -35,8 +38,118 @@ const addPatient = (e) => {
 //   console.log("Name: ", Name , "Age: ", age , "Gender: ", gender , "Condition: ", selectedCondition); ;
 patientList.push({ Name, age, gender, selectedCondition });
 
-//   console.log(patientList)
+// ResetPatientData();
+
+  console.log(patientList);
+  generateReport(patientList);
+
 }
 
-addPatientbtn.addEventListener("click", addPatient);
+
+// function generateReport() {
+//   const numPatients = patientList.length;
+//   const conditionsCount = {
+//     Diabetes: 0,
+//     Thyroid: 0,
+//     "High Blood Pressure": 0,
+//   };
+//   const genderConditionsCount = {
+//     Male: {
+//       Diabetes: 0,
+//       Thyroid: 0,
+//       "High Blood Pressure": 0,
+//     },
+//     Female: {
+//       Diabetes: 0,
+//       Thyroid: 0,
+//       "High Blood Pressure": 0,
+//     },
+//   };
+
+//   for (const patient of patientList) {
+//     conditionsCount[patient.condition]++;
+//     genderConditionsCount[patient.gender][patient.condition]++;
+//   }
+
+//   report.innerHTML = `Number of patients: ${numPatients}<br><br>`;
+//   report.innerHTML += `Conditions Breakdown:<br>`;
+//   for (const condition in conditionsCount) {
+//     report.innerHTML += `${condition}: ${conditionsCount[condition]}<br>`;
+//   }
+
+//   report.innerHTML += `<br>Gender-Based Conditions:<br>`;
+//   for (const gender in genderConditionsCount) {
+//     report.innerHTML += `${gender}:<br>`;
+//     for (const condition in genderConditionsCount[gender]) {
+//       report.innerHTML += `&nbsp;&nbsp;${condition}: ${genderConditionsCount[gender][condition]}<br>`;
+//     }
+//   }
+// }
+
+addPatientButton.addEventListener("click", addPatient);
+
+function generateReport(patientList){
+
+    const conditionalCount = {
+      Diabetes: 0,
+      Thyroid: 0,
+      "High Blood Pressure": 0,  // Add space
+    };
+    
+    const genderBasedCondition = {
+      Male: {
+        Diabetes: 0,
+        Thyroid: 0,
+        "High Blood Pressure": 0, // Add space
+      },
+      Female: {
+        Diabetes: 0,
+        Thyroid: 0,
+        "High Blood Pressure": 0, // Add space
+      }
+    };
+    
+
+ patientList.forEach((patient)=>{
+  const {selectedCondition , gender} = patient;
+
+  // console.log( typeof(selectedCondition));
+  // console.log( typeof(gender));
+  if(conditionalCount.hasOwnProperty(selectedCondition)){
+    conditionalCount[selectedCondition]++;
+  }
+
+  if(genderBasedCondition[gender]&&genderBasedCondition[gender].hasOwnProperty(selectedCondition)){
+    genderBasedCondition[gender][selectedCondition]++;   
+  } 
+
+
+  console.log("Number of patients:", patientList.length);
+  console.log("Conditions Breakdown:", conditionalCount);
+  console.log("Gender-Based Conditions:", genderBasedCondition);
+
+
+
+  // Display the results
+console.log("Number of patients:", patientList.length);
+console.log("Conditions Breakdown:");
+console.log("Diabetes:", conditionalCount.Diabetes);
+console.log("Thyroid:",conditionalCount.Thyroid);
+console.log("High Blood Pressure:", conditionalCount["High Blood Pressure"]);
+
+  // Now updating the Dom and inserting values
+  
+ })
+
+}
+
+// function ResetPatientData(){
+//   document.getElementById("name").value = "";
+//   document.getElementById("age").value = "";
+// document.querySelector('input[name="gender"]:checked').checked = false;
+//   document.getElementById("condition").value = "";
+
+// }
+
+
 
