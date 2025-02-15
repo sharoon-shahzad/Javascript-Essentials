@@ -138,7 +138,19 @@ console.log("Thyroid:",conditionalCount.Thyroid);
 console.log("High Blood Pressure:", conditionalCount["High Blood Pressure"]);
 
   // Now updating the Dom and inserting values
+
+  report.innerHTML = `<br>Condition breakdown :</br>`
+  for(const condition in conditionalCount){
+    report.innerHTML += `${condition}: ${conditionalCount[condition]}<br>`;
+  }
   
+  report.innerHTML += `<br>Gender-Based Conditions:<br>`;
+  for (const gender in genderBasedCondition) {
+    report.innerHTML += `${gender}:<br>`;
+    for (const condition in genderBasedCondition[gender]) {
+      report.innerHTML += `&nbsp;&nbsp;${condition}: ${genderBasedCondition[gender][condition]}<br>`;
+    }
+  }
  })
 
 }
@@ -153,3 +165,88 @@ console.log("High Blood Pressure:", conditionalCount["High Blood Pressure"]);
 
 
 
+// function to retreive the data using asynchronoous fetch api which is promise based 
+// target the search button and add event listener to it
+// grap the value from the user input and pass it to the fetch api
+
+// async function searchCondition(){
+//   const input = document.getElementById("search").value;
+//   const resultDiv = document.getElementById("result");
+//     const conditions = await fetchData();
+ 
+// }
+
+async function searchCondition() {
+  const input = document.getElementById("conditionInput").value.trim().toLowerCase();
+  const resultDiv = document.getElementById("result");
+
+  // Wait for fetched data
+  const conditions = await fetchData();
+
+  // Find matching condition
+  const foundCondition = conditions.find(condition => condition.name.toLowerCase() === input);
+
+  // Display result
+  if (foundCondition) {
+    resultDiv.innerHTML = `
+      <h3>${foundCondition.name}</h3>
+      <p>${foundCondition.imgsrc}</p>
+      <p><strong>Symptoms:</strong> ${foundCondition.symptoms.join(", ")}</p>
+      <p><strong>Prevention:</strong> ${foundCondition.prevention}</p>
+      <p><strong>Treatment:</strong> ${foundCondition.treatment}</p>
+    `;
+  } else {
+    resultDiv.innerHTML = `<p>No matching condition found.</p>`;
+  }
+}
+
+
+// Add event listener
+document.getElementById("btnSearch").addEventListener("click", searchCondition);
+
+// Fetch function
+async function fetchData() {
+  try {
+    const response = await fetch("health.json");
+    const data = await response.json();
+    return data.conditions; // Ensure we return the conditions array
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return []; // Return an empty array in case of an error
+  }
+}
+
+
+btnSearch.addEventListener("click", searchCondition);
+
+
+
+// async function fetchData() {
+//   try {
+//     const response = await fetch("health.json");
+//     const data = await response.json();
+//     return data.conditions; // Ensure it returns the conditions array
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//   }
+// }
+
+// async function fetchData(){
+//   try {
+//     const response = await fetch("health.json");
+//     const data = await response.json();
+//     // console.log(data.conditions);
+//     const conditions = data.conditions;
+//     return conditions;
+//     // console.log(conditions);
+//     // conditions.find((condition)=>{
+//     //   if(condition.name === "Diabetes"){
+//     //     console.log(condition);  
+
+//     //   }
+//     // })
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
+fetchData();
