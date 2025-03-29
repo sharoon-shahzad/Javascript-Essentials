@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    height: 500px;
+    width: 100%;
+    background-color: #a51919;
+    padding: 100px;
+    margin: 20px auto;
+    border-radius: 10px;
+    /* position: relative; */
+}
+.main2{
+    position: sticky;
+    top : 130px;
+    right: 10px;
+    height: 300px;
+    width: 100%;
+    background-color: #443131;
+    padding: 20px;
+    border-radius: 10px;
+  
+}
+.main3{
+
+    height: 300px;
+    width: 100%;
+    background-color: #160333;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Positioning-relative:: it will move to its original position 
+it will will always maintain its original position */
+
+/* #box3{
+    position: relative;
+    top: 100px;
+    left: 10px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+} */
+
+/* Positioning-absolute: Absolute positioning removes the element from the document flow and places it relative to the nearest ancestor with a positioning context (relative, absolute, or fixed).
+
+it will not maintain its original position
+it will move to nearest positioned parent */
+
+/* #box3{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+} */
+
+/* Position-Sticky : Sticky positioning allows an element to be positioned relative to the viewport, but stick to the top of the page when you scroll.
+
+maintain its original space 
+move wrt to its original space
+will  not move out of it parent 
+
+*/
+
+#box3{
+    position: sticky;
+    top: 10px;
+    right: 10px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+}
+.main2
+/* Position-Fixed: Fixed positioning places an element at a specified position relative to the viewport.
+
+maintain its original space 
+move wrt to its original space
+will move out of its parent container
+
+*/
+#box1{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+}
